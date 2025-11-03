@@ -3,7 +3,6 @@ const estilos = {
   italic: 'font-style:italic;',
   bold: 'font-weight:700;',
   digital: 'font-family:monospace; letter-spacing:1px; text-transform:uppercase;',
-  script: 'font-family:"Brush Script MT", cursive; font-style:italic;',
   mono: 'font-family:"Courier New", monospace;'
 };
 
@@ -27,7 +26,7 @@ function saveProfile(){
   const perfis = JSON.parse(localStorage.getItem('perfis')||'{}');
   perfis[cpf] = { nome, assinatura, estilo, createdAt: new Date().toISOString() };
   localStorage.setItem('perfis', JSON.stringify(perfis));
-  alert('Perfil salvo para ' + nome);
+  showToast('Perfil salvo com sucesso');
   document.getElementById('cpf').value = formatCPF(cpf);
   loadProfilesInList();
 }
@@ -36,7 +35,7 @@ function confirmReceipt(){
   const cpfRaw = document.getElementById('cpfConfirm').value;
   const cpf = onlyDigits(cpfRaw);
   const perfis = JSON.parse(localStorage.getItem('perfis')||'{}');
-  if(!perfis[cpf]){ if(confirm('CPF não cadastrado. Deseja cadastrar agora?')){ document.getElementById('cpf').value = formatCPF(cpf); window.scrollTo({top:0, behavior:"smooth"}); } return; }
+  if(!perfis[cpf]){ if(confirm('CPF não cadastrado. Deseja cadastrar agora?')){ document.getElementById('cpf').value = formatCPF(cpf); window.scrollTo({top:0, behavior:'smooth'});} return; }
   const profile = perfis[cpf];
   const now = new Date();
   const reg = { cpf: formatCPF(cpf), nome: profile.nome, assinatura: profile.assinatura, estilo: profile.estilo, ts: now.toISOString(), date: now.toLocaleDateString('pt-BR'), time: now.toLocaleTimeString('pt-BR') };
@@ -44,7 +43,11 @@ function confirmReceipt(){
   regs.unshift(reg);
   localStorage.setItem('registros', JSON.stringify(regs));
   renderTable();
-  alert('Recebimento confirmado para ' + profile.nome + ' em ' + reg.date + ' ' + reg.time);
+  showSuccess('Recebimento confirmado para ' + profile.nome);
+  // show visual badge near input
+  const badge = document.getElementById('badgeSuccess');
+  badge.style.display = 'inline-block';
+  setTimeout(()=> badge.style.display = 'none', 2000);
 }
 
 function renderTable(){
@@ -60,12 +63,13 @@ function renderTable(){
 
 function exportCSV(){
   const regs = JSON.parse(localStorage.getItem('registros')||'[]');
-  if(regs.length===0){ alert('Nenhum registro para exportar.'); return; }
+  if(regs.length===0){ showToast('Nenhum registro para exportar.'); return; }
   const lines = ['"CPF","Nome","Assinatura","DataHora"'];
   regs.forEach(r=> lines.push(`"${r.cpf}","${r.nome}","${r.assinatura.replace(/"/g,'""')}","${r.date} ${r.time}"`) );
   const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'registros_quentinhas.csv'; a.click();
+  showToast('CSV gerado');
 }
 
 function loadProfilesInList(){
@@ -75,6 +79,18 @@ function loadProfilesInList(){
   const keys = Object.keys(p);
   if(keys.length===0){ list.textContent = 'Nenhum perfil cadastrado.'; return; }
   keys.forEach(k=> { const item = document.createElement('div'); item.textContent = formatCPF(k) + ' — ' + p[k].nome; list.appendChild(item); });
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.opacity = 1;
+  setTimeout(()=> t.style.opacity = 0, 2200);
+}
+
+function showSuccess(msg){
+  const s = document.getElementById('successMsg');
+  s.textContent = msg; s.style.opacity = 1;
+  setTimeout(()=> s.style.opacity = 0, 2500);
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{

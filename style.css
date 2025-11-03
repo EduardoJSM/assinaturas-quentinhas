@@ -1,27 +1,35 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap');
 :root{
-  --primary: #0a4c7d;
+  --primary: #06396b;
+  --accent: #0a63b7;
   --bg: #f5f6fa;
-  --muted: #6b7280;
   --card: #ffffff;
-  --radius: 12px;
+  --muted: #64748b;
+  --success: #10b981;
+  --radius: 14px;
 }
 *{box-sizing:border-box}
-body{font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif; margin:0; background:var(--bg); color:#0f172a;}
-.header{background:linear-gradient(90deg,var(--primary),#053452); color:#fff; padding:14px 20px; display:flex; align-items:center; gap:16px; box-shadow:0 2px 6px rgba(10, 75, 125,0.12);}
-.header img{height:56px; border-radius:8px; background:#fff; padding:6px}
+body{font-family:'Poppins', 'Roboto', Arial, sans-serif; margin:0; background:var(--bg); color:#07263a; -webkit-font-smoothing:antialiased;}
+.header{background:linear-gradient(90deg,var(--primary), var(--accent)); color:#fff; padding:18px 24px; display:flex; align-items:center; gap:18px; box-shadow:0 6px 20px rgba(6,57,107,0.12); position:sticky; top:0; z-index:20;}
+.header img{height:60px; width:60px; object-fit:contain; border-radius:10px; background:#fff; padding:6px}
 .header .title{font-size:18px; font-weight:700}
-.container{max-width:980px; margin:28px auto; padding:0 16px;}
-.grid{display:grid; grid-template-columns:1fr 380px; gap:18px;}
-.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:0 6px 20px rgba(15,23,42,0.06);}
-h1,h2{margin:0 0 8px 0}
-label{display:block; margin-top:10px; font-weight:600; color:#111827}
-input,select,button,textarea{width:100%; padding:10px; border-radius:10px; border:1px solid #e6e9ef; font-size:15px}
-button{background:var(--primary); color:#fff; font-weight:700; border:0; cursor:pointer; padding:10px 12px}
-button.ghost{background:#eef2f7; color:#0f172a}
-.preview{border:1px dashed #e6e9ef; padding:12px; text-align:center; border-radius:10px; min-height:56px; display:flex; align-items:center; justify-content:center; font-size:20px}
+.container{max-width:1100px; margin:28px auto; padding:0 18px;}
+.grid{display:grid; grid-template-columns:1fr 380px; gap:22px; align-items:start;}
+.card{background:var(--card); border-radius:var(--radius); padding:20px; box-shadow:0 10px 30px rgba(15,23,42,0.06);}
+h1,h2{margin:0 0 10px 0}
+label{display:block; margin-top:10px; font-weight:600; color:#0f172a}
+input,select,button,textarea{width:100%; padding:12px; border-radius:10px; border:1px solid #e6e9ef; font-size:15px; background:#fff}
+button{background:var(--primary); color:#fff; font-weight:700; border:0; cursor:pointer; padding:12px 14px; border-radius:10px; transition:all .18s ease}
+button:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(10,60,120,0.12)}
+button.ghost{background:#eef3fb; color:var(--primary); font-weight:600}
+.preview{border-radius:10px; padding:14px; min-height:64px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(246,248,251,1), rgba(255,255,255,1)); border:1px solid #edf2f7; font-size:20px}
+.badge{display:inline-block; padding:6px 10px; border-radius:999px; background:var(--success); color:#fff; font-weight:700; margin-left:8px; font-size:13px}
 .table{width:100%; border-collapse:collapse; margin-top:12px}
 .table th, .table td{padding:10px; border-bottom:1px solid #f1f5f9; text-align:left; font-size:14px}
-.footer{background:transparent; color:var(--muted); text-align:center; padding:22px 10px; font-size:13px; margin-top:18px}
-.controls{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
-@media(max-width:900px){ .grid{grid-template-columns:1fr; } .header{padding:12px} .header img{height:48px} }
+.footer{background:transparent; color:var(--muted); text-align:center; padding:24px 10px; font-size:13px; margin-top:18px}
+.controls{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+.kpi{display:flex; gap:12px; align-items:center; margin-bottom:12px}
+.kpi .num{font-size:20px; font-weight:700; color:var(--primary)}
+.notice{background:#fff7ed; border-left:4px solid #f59e0b; padding:10px 12px; border-radius:8px; color:#92400e; margin-top:12px}
+@media(max-width:960px){ .grid{grid-template-columns:1fr; } .header img{height:48px} .container{padding:0 12px} }
