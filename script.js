@@ -8,6 +8,7 @@ const estilos = {
 
 function onlyDigits(s){ return String(s||'').replace(/\D/g,''); }
 function formatCPF(cpf){ cpf = onlyDigits(cpf); if(cpf.length!==11) return cpf; return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4'); }
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function loadPreview(){
   const text = document.getElementById('assinatura').value || document.getElementById('nome').value || '';
@@ -17,18 +18,34 @@ function loadPreview(){
   pv.textContent = text || 'Pré-visualização da assinatura';
 }
 
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.opacity = 1;
+  setTimeout(()=> t.style.opacity = 0, 2200);
+}
+
 function saveProfile(){
   const nome = document.getElementById('nome').value.trim();
   const cpf = onlyDigits(document.getElementById('cpf').value);
   const assinatura = document.getElementById('assinatura').value.trim();
   const estilo = document.getElementById('estilo').value;
-  if(!nome || cpf.length!==11 || !assinatura){ alert('Preencha nome, CPF (11 dígitos) e texto da assinatura.'); return; }
+  if(!nome || cpf.length!==11 || !assinatura){ showToast('Preencha nome, CPF (11 dígitos) e assinatura.'); return; }
   const perfis = JSON.parse(localStorage.getItem('perfis')||'{}');
   perfis[cpf] = { nome, assinatura, estilo, createdAt: new Date().toISOString() };
   localStorage.setItem('perfis', JSON.stringify(perfis));
   showToast('Perfil salvo com sucesso');
   document.getElementById('cpf').value = formatCPF(cpf);
   loadProfilesInList();
+  loadPreview();
+}
+
+function loadProfilesInList(){
+  const list = document.getElementById('profilesList');
+  list.innerHTML = '';
+  const p = JSON.parse(localStorage.getItem('perfis')||'{}');
+  const keys = Object.keys(p);
+  if(keys.length===0){ list.textContent = 'Nenhum perfil cadastrado.'; return; }
+  keys.forEach(k=> { const item = document.createElement('div'); item.textContent = formatCPF(k) + ' — ' + p[k].nome; list.appendChild(item); });
 }
 
 function confirmReceipt(){
@@ -43,11 +60,10 @@ function confirmReceipt(){
   regs.unshift(reg);
   localStorage.setItem('registros', JSON.stringify(regs));
   renderTable();
-  showSuccess('Recebimento confirmado para ' + profile.nome);
-  // show visual badge near input
   const badge = document.getElementById('badgeSuccess');
   badge.style.display = 'inline-block';
   setTimeout(()=> badge.style.display = 'none', 2000);
+  showToast('Recebimento confirmado para ' + profile.nome);
 }
 
 function renderTable(){
@@ -56,7 +72,7 @@ function renderTable(){
   const regs = JSON.parse(localStorage.getItem('registros')||'[]');
   regs.forEach(r=>{
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td>'+r.cpf+'</td><td>'+r.nome+'</td><td style="'+estilos[r.estilo]+'">'+r.assinatura+'</td><td>'+r.date+' '+r.time+'</td>';
+    tr.innerHTML = '<td>'+r.cpf+'</td><td>'+escapeHtml(r.nome)+'</td><td style="'+estilos[r.estilo]+'">'+escapeHtml(r.assinatura)+'</td><td>'+r.date+' '+r.time+'</td>';
     tbody.appendChild(tr);
   });
 }
@@ -65,32 +81,11 @@ function exportCSV(){
   const regs = JSON.parse(localStorage.getItem('registros')||'[]');
   if(regs.length===0){ showToast('Nenhum registro para exportar.'); return; }
   const lines = ['"CPF","Nome","Assinatura","DataHora"'];
-  regs.forEach(r=> lines.push(`"${r.cpf}","${r.nome}","${r.assinatura.replace(/"/g,'""')}","${r.date} ${r.time}"`) );
+  regs.forEach(r=> lines.push(`"${r.cpf}","${r.nome.replace(/"/g,'""')}","${r.assinatura.replace(/"/g,'""')}","${r.date} ${r.time}"`) );
   const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'registros_quentinhas.csv'; a.click();
   showToast('CSV gerado');
-}
-
-function loadProfilesInList(){
-  const list = document.getElementById('profilesList');
-  list.innerHTML = '';
-  const p = JSON.parse(localStorage.getItem('perfis')||'{}');
-  const keys = Object.keys(p);
-  if(keys.length===0){ list.textContent = 'Nenhum perfil cadastrado.'; return; }
-  keys.forEach(k=> { const item = document.createElement('div'); item.textContent = formatCPF(k) + ' — ' + p[k].nome; list.appendChild(item); });
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.style.opacity = 1;
-  setTimeout(()=> t.style.opacity = 0, 2200);
-}
-
-function showSuccess(msg){
-  const s = document.getElementById('successMsg');
-  s.textContent = msg; s.style.opacity = 1;
-  setTimeout(()=> s.style.opacity = 0, 2500);
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -101,6 +96,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('saveBtn').addEventListener('click', saveProfile);
   document.getElementById('confirmBtn').addEventListener('click', confirmReceipt);
   document.getElementById('exportBtn').addEventListener('click', exportCSV);
+  document.getElementById('clearProfiles').addEventListener('click', ()=>{ localStorage.removeItem('perfis'); loadProfilesInList(); showToast('Perfis apagados'); });
+  document.getElementById('clearLog').addEventListener('click', ()=>{ localStorage.removeItem('registros'); renderTable(); showToast('Registros apagados'); });
   loadProfilesInList();
   renderTable();
   loadPreview();
