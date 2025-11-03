@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sistema de Confirmação de Recebimento de Quentinhas — Prefeitura de Barra dos Coqueiros</title>
+  <link rel="icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <img src="img/logo.png" alt="Logo Prefeitura">
+    <div>
+      <h1>Sistema de Confirmação de Recebimento de Quentinhas</h1>
+      <div class="small">Prefeitura Municipal de Barra dos Coqueiros — SE</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card">
+        <h2>Passo A — Cadastro Inicial</h2>
+        <label>Nome completo</label>
+        <input id="nome" placeholder="Ex: João da Silva">
+        <label>CPF (ex.: 000.000.000-00)</label>
+        <input id="cpf" placeholder="000.000.000-00">
+        <label>Texto da assinatura</label>
+        <input id="assinatura" placeholder="Ex: J. da Silva">
+        <label>Estilo da assinatura</label>
+        <select id="estilo">
+          <option value="italic">Itálico leve</option>
+          <option value="bold">Negrito elegante</option>
+          <option value="digital">Digital (carimbo)</option>
+          <option value="script">Script fino</option>
+          <option value="mono">Monoespaçado</option>
+        </select>
+        <div class="preview" id="preview">Pré-visualização da assinatura</div>
+        <div class="controls">
+          <button id="saveBtn">Salvar perfil</button>
+          <button class="ghost" onclick="localStorage.removeItem('perfis'); loadProfilesInList(); alert('Perfis apagados');">Apagar perfis</button>
+        </div>
+        <div class="small" style="margin-top:8px">Os perfis são armazenados no navegador. Para migrar, exporte o arquivo JSON manualmente.</div>
+      </section>
+
+      <aside class="card">
+        <h2>Perfis cadastrados</h2>
+        <div id="profilesList" class="small">Nenhum perfil cadastrado.</div>
+        <hr style="margin:12px 0">
+        <h2>Passo B — Confirmação</h2>
+        <label>CPF</label>
+        <input id="cpfConfirm" placeholder="000.000.000-00">
+        <div class="controls">
+          <button id="confirmBtn">Confirmar recebimento</button>
+          <button class="ghost" onclick="localStorage.removeItem('registros'); renderTable(); alert('Registros apagados');">Limpar registros</button>
+        </div>
+        <div style="margin-top:12px">
+          <button id="exportBtn" class="ghost">Exportar CSV</button>
+        </div>
+      </aside>
+    </div>
+
+    <section class="card">
+      <h2>Registros</h2>
+      <table id="registros" class="table">
+        <thead><tr><th>CPF</th><th>Nome</th><th>Assinatura</th><th>Data / Hora</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Desenvolvido pela Prefeitura Municipal de Barra dos Coqueiros – SE, 2025
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
