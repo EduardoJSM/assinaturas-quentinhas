@@ -1,5 +1,4 @@
 
-// Script for site functionality: profiles and registrations stored in localStorage
 const estilos = {
   italic: 'font-style:italic;',
   bold: 'font-weight:700;',
@@ -37,7 +36,7 @@ function confirmReceipt(){
   const cpfRaw = document.getElementById('cpfConfirm').value;
   const cpf = onlyDigits(cpfRaw);
   const perfis = JSON.parse(localStorage.getItem('perfis')||'{}');
-  if(!perfis[cpf]){ if(confirm('CPF não cadastrado. Deseja cadastrar agora?')){ document.getElementById('cpf').value = formatCPF(cpf); scrollToTop(); } return; }
+  if(!perfis[cpf]){ if(confirm('CPF não cadastrado. Deseja cadastrar agora?')){ document.getElementById('cpf').value = formatCPF(cpf); window.scrollTo({top:0, behavior:"smooth"}); } return; }
   const profile = perfis[cpf];
   const now = new Date();
   const reg = { cpf: formatCPF(cpf), nome: profile.nome, assinatura: profile.assinatura, estilo: profile.estilo, ts: now.toISOString(), date: now.toLocaleDateString('pt-BR'), time: now.toLocaleTimeString('pt-BR') };
@@ -77,8 +76,6 @@ function loadProfilesInList(){
   if(keys.length===0){ list.textContent = 'Nenhum perfil cadastrado.'; return; }
   keys.forEach(k=> { const item = document.createElement('div'); item.textContent = formatCPF(k) + ' — ' + p[k].nome; list.appendChild(item); });
 }
-
-function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
 document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('assinatura').addEventListener('input', loadPreview);
