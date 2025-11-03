@@ -1,98 +1,206 @@
-/* --- Estilo Moderno do Sistema de Assinaturas Digitais --- */
-
-:root {
-  --azul-prefeitura: #003366;
-  --azul-secundario: #0077cc;
-  --cinza-fundo: #f4f6f8;
-  --branco: #ffffff;
-  --borda: #dcdfe3;
+/* ================================
+   ESTILO GERAL - ASSINATURAS QUENTINHAS
+   ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 body {
-  font-family: "Poppins", Arial, sans-serif;
-  background-color: var(--cinza-fundo);
-  color: #222;
-  margin: 0;
-  padding: 0;
+  background-color: #fffaf7;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* ================================
+   CABEÇALHO
+   ================================ */
 header {
-  background: linear-gradient(90deg, var(--azul-prefeitura), var(--azul-secundario));
-  color: var(--branco);
+  background: linear-gradient(135deg, #ff6a00, #ff9500);
+  color: white;
+  padding: 20px 0;
   text-align: center;
-  padding: 1.2rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 header img {
   height: 60px;
+  margin-bottom: 10px;
 }
 
-.container {
-  max-width: 900px;
-  margin: 2rem auto;
-  background: var(--branco);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-h1, h2 {
-  color: var(--azul-prefeitura);
-  margin-bottom: 0.5rem;
+/* ================================
+   MENU / NAVEGAÇÃO
+   ================================ */
+nav {
+  background: #fff3e6;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 12px 0;
+  border-bottom: 2px solid #ffe0b3;
+}
+
+nav a {
+  color: #ff6a00;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d45500;
+}
+
+/* ================================
+   SEÇÃO PRINCIPAL
+   ================================ */
+main {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 section {
-  margin-top: 1.5rem;
-  border-top: 2px solid var(--borda);
-  padding-top: 1rem;
+  margin-bottom: 60px;
+}
+
+h2 {
+  color: #ff6a00;
+  margin-bottom: 20px;
+  border-left: 5px solid #ff9500;
+  padding-left: 10px;
+  font-size: 1.6rem;
+}
+
+p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* ================================
+   BOTÕES
+   ================================ */
+button, .btn {
+  background: linear-gradient(135deg, #ff6a00, #ff9500);
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff9500, #ff6a00);
+}
+
+/* ================================
+   PLANOS / CARTÕES
+   ================================ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  color: #ff6a00;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+/* ================================
+   FORMULÁRIO
+   ================================ */
+form {
+  background: #fff7f0;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 label {
+  display: block;
   font-weight: 600;
-  margin-right: 8px;
+  color: #444;
+  margin-top: 15px;
 }
 
-input, select {
-  padding: 0.5rem 0.7rem;
-  border: 1px solid var(--borda);
-  border-radius: 6px;
-  margin-right: 0.5rem;
-}
-
-button {
-  background: var(--azul-secundario);
-  color: var(--branco);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: var(--azul-prefeitura);
-}
-
-table {
+input, select, textarea {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
-table th, table td {
-  padding: 0.8rem;
-  border-bottom: 1px solid var(--borda);
-  text-align: left;
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #ff6a00;
+  box-shadow: 0 0 4px rgba(255, 106, 0, 0.4);
 }
 
+/* ================================
+   RODAPÉ
+   ================================ */
 footer {
+  background: #ff6a00;
+  color: #fff;
   text-align: center;
-  margin-top: 2rem;
-  color: #666;
+  padding: 20px 10px;
+  margin-top: 40px;
   font-size: 0.9rem;
+}
+
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    margin: 20px auto;
+  }
 }
