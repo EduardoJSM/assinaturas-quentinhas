@@ -1,64 +1,98 @@
-/* ======= Estilo Moderno Prefeitura ======= */
+/* --- Estilo Moderno do Sistema de Assinaturas Digitais --- */
+
+:root {
+  --azul-prefeitura: #003366;
+  --azul-secundario: #0077cc;
+  --cinza-fundo: #f4f6f8;
+  --branco: #ffffff;
+  --borda: #dcdfe3;
+}
+
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: var(--cinza-fundo);
+  color: #222;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background: linear-gradient(135deg, #004aad, #0074d9);
-  color: white;
-  padding: 20px;
+  background: linear-gradient(90deg, var(--azul-prefeitura), var(--azul-secundario));
+  color: var(--branco);
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 1.2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 header img {
   height: 60px;
-  vertical-align: middle;
-  margin-right: 10px;
 }
 
-main {
+.container {
   max-width: 900px;
-  margin: 30px auto;
-  background: white;
-  padding: 30px;
+  margin: 2rem auto;
+  background: var(--branco);
+  padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #004aad;
-  border-bottom: 2px solid #0074d9;
-  padding-bottom: 5px;
+h1, h2 {
+  color: var(--azul-prefeitura);
+  margin-bottom: 0.5rem;
 }
 
-input, select, button {
-  font-size: 15px;
-  padding: 8px 10px;
+section {
+  margin-top: 1.5rem;
+  border-top: 2px solid var(--borda);
+  padding-top: 1rem;
+}
+
+label {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+input, select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--borda);
   border-radius: 6px;
-  border: 1px solid #ccc;
-  margin: 5px;
+  margin-right: 0.5rem;
 }
 
 button {
-  background: #0074d9;
-  color: white;
+  background: var(--azul-secundario);
+  color: var(--branco);
   border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 button:hover {
-  background: #005fa3;
+  background: var(--azul-prefeitura);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th, table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--borda);
+  text-align: left;
 }
 
 footer {
   text-align: center;
-  padding: 20px;
+  margin-top: 2rem;
   color: #666;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
