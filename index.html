@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sistema de Assinaturas — Quentinhas</title>
-  <link rel="icon" href="img/favicon.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Sistema de Assinaturas Digitais — Prefeitura Municipal de Barra dos Coqueiros — SE</title>
+  <link rel="icon" href="img/logo-prefeitura.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Caveat&family=Dancing+Script&family=Great+Vibes&family=Pacifico&family=Parisienne&family=Satisfy&family=Shadows+Into+Light&family=Tangerine&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
+  <header class="header">
     <div class="header-inner">
-      <img src="img/logo.png" alt="Logo Prefeitura" class="logo" />
+      <img src="img/logo-prefeitura.png" alt="Logo Prefeitura" />
       <div class="titles">
-        <div class="product">Sistema de Assinaturas Digitais</div>
+        <div class="title">Sistema de Assinaturas Digitais</div>
         <div class="subtitle">Prefeitura Municipal de Barra dos Coqueiros — SE</div>
       </div>
     </div>
@@ -20,68 +21,61 @@
 
   <main class="container">
     <section class="card">
-      <h2>Passo A — Cadastro Inicial</h2>
-      <p class="muted">Cada servidor cadastra sua assinatura uma única vez.</p>
+      <h2>Cadastro de assinatura</h2>
+      <div class="small">Preencha nome, CPF e o texto da assinatura. Escolha um estilo para ver a pré-visualização.</div>
 
       <label for="nome">Nome completo</label>
       <input id="nome" placeholder="Ex: João da Silva" />
 
-      <label for="cpf">CPF (ex.: 000.000.000-00)</label>
+      <label for="cpf">CPF (apenas números ou formatado)</label>
       <input id="cpf" placeholder="000.000.000-00" />
 
       <label for="assinatura">Texto da assinatura</label>
-      <input id="assinatura" placeholder="Ex: J. da Silva" />
+      <input id="assinatura" placeholder="Digite sua assinatura..." />
 
       <label for="estilo">Estilo da assinatura</label>
       <select id="estilo">
-        <option value="italic">Itálico leve</option>
-        <option value="bold">Negrito elegante</option>
-        <option value="digital">Digital (carimbo)</option>
-        <option value="mono">Monoespaçado</option>
+        <option value="sig-1">Dancing Script</option>
+        <option value="sig-2">Great Vibes</option>
+        <option value="sig-3">Pacifico</option>
+        <option value="sig-4">Satisfy</option>
+        <option value="sig-5">Caveat</option>
+        <option value="sig-6">Allura</option>
+        <option value="sig-7">Parisienne</option>
+        <option value="sig-8">Shadows Into Light</option>
+        <option value="sig-9">Alex Brush</option>
+        <option value="sig-10">Tangerine</option>
       </select>
 
-      <div id="preview" class="preview">Pré-visualização da assinatura</div>
+      <div class="preview" id="preview">Pré-visualização da assinatura</div>
 
       <div class="controls">
-        <button id="saveBtn" class="btn">Salvar perfil</button>
-        <button id="clearProfiles" class="btn ghost">Apagar perfis</button>
+        <button id="saveBtn" class="btn">Salvar Assinatura</button>
+        <button id="gotoSign" class="btn ghost">Ir para Assinar</button>
+        <button id="clearAll" class="btn ghost">Apagar todos</button>
       </div>
     </section>
 
-    <aside class="card side">
-      <h3>Passo B — Confirmação</h3>
+    <aside class="card">
+      <h2>Confirmar / Buscar</h2>
+      <div class="small">Digite o CPF para recuperar assinatura e confirmar recebimento.</div>
+
       <label for="cpfConfirm">CPF</label>
-      <div class="row">
-        <input id="cpfConfirm" placeholder="000.000.000-00" />
-        <button id="confirmBtn" class="btn primary">Confirmar recebimento <span id="badgeSuccess" class="badge" style="display:none">✔️</span></button>
+      <input id="cpfConfirm" placeholder="000.000.000-00" />
+
+      <div class="controls">
+        <button id="loadBtn" class="btn">Buscar</button>
       </div>
 
-      <div class="controls" style="margin-top:12px">
-        <button id="exportBtn" class="btn ghost">Exportar CSV</button>
-        <button id="clearLog" class="btn ghost">Limpar registros</button>
-      </div>
-
-      <div style="margin-top:18px">
-        <div class="muted">Perfis cadastrados</div>
-        <div id="profilesList" class="small muted">Nenhum perfil cadastrado.</div>
+      <div id="loaded" class="result-card" style="display:none"></div>
+      <div id="confirmWrap" style="display:none; margin-top:12px">
+        <button id="confirmBtn" class="btn">Confirmar recebimento</button>
       </div>
     </aside>
-
-    <section class="card wide">
-      <h2>Registros</h2>
-      <table id="registros" class="table">
-        <thead><tr><th>CPF</th><th>Nome</th><th>Assinatura</th><th>Data / Hora</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </section>
   </main>
 
-  <div id="toast" class="toast" aria-live="polite"></div>
+  <div class="footer">© 2025 Prefeitura Municipal de Barra dos Coqueiros — Desenvolvido por AlphaCore</div>
 
-  <footer class="site-footer">
-    Prefeitura Municipal de Barra dos Coqueiros – Sistema de Assinaturas Digitais © 2025
-  </footer>
-
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Assinar — Sistema de Assinaturas Digitais</title>
+  <link rel="icon" href="img/logo-prefeitura.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Caveat&family=Dancing+Script&family=Great+Vibes&family=Pacifico&family=Parisienne&family=Satisfy&family=Shadows+Into+Light&family=Tangerine&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <img src="img/logo-prefeitura.png" alt="Logo Prefeitura" />
+      <div class="titles">
+        <div class="title">Sistema de Assinaturas Digitais</div>
+        <div class="subtitle">Prefeitura Municipal de Barra dos Coqueiros — SE</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" style="max-width:700px; margin:auto">
+      <h2>Assinar Documento</h2>
+      <div class="small">Abaixo está a assinatura recuperada. Confirme quando pronto.</div>
+
+      <label for="cpfTarget">CPF</label>
+      <input id="cpfTarget" placeholder="000.000.000-00" />
+
+      <div id="profileBox" class="result-card" style="display:none"></div>
+
+      <div class="controls" style="justify-content:center; margin-top:12px">
+        <button id="confirmSign" class="btn">Confirmar Assinatura</button>
+        <a href="index.html" class="btn ghost" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center">Voltar</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">© 2025 Prefeitura Municipal de Barra dos Coqueiros — Desenvolvido por AlphaCore</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
